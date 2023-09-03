@@ -16,7 +16,8 @@
 
 #usage: stresscpu.sh <procs> <secs> or stresscpu.sh -h for help
 #with no args defaults to numCores+1 and 60 secs
-numProcs=$(nproc 2>&1)
+#direct both stabdard output of file descriptor 1 & sandard error of file descriptor 2 to nproc
+numProcs=$(nproc 2>&1) 
 numProcs=$((numProcs+1))
 if [ ! -z $1 ]; then
    numProcs=$1
@@ -28,7 +29,7 @@ if [ ! -z $2 ]; then
 fi
 
 
-#setup bashtrap
+#setup bashtrap configuration
 trap bashtrap INT
 
 #function to end cpu stress cycles
